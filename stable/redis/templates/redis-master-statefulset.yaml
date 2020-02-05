@@ -165,6 +165,8 @@ spec:
         volumeMounts:
         - name: health
           mountPath: /health
+        - name: tmp 
+          mountPath: /tmp 
         {{- if .Values.usePasswordFile }}
         - name: redis-password
           mountPath: /opt/bitnami/redis/secrets/
@@ -262,6 +264,8 @@ spec:
         volumeMounts:
         - name: health
           mountPath: /health
+        - name: tmp 
+          mountPath: /tmp 
         {{- if .Values.usePasswordFile }}
         - name: redis-password
           mountPath: /opt/bitnami/redis/secrets/
@@ -297,6 +301,8 @@ spec:
               key: {{ template "redis.secretPasswordKey" . }}
         {{- end }}
         volumeMounts:
+        - name: tmp 
+          mountPath: /tmp 
         {{- if .Values.usePasswordFile }}
         - name: redis-password
           mountPath: /secrets/
@@ -379,6 +385,8 @@ spec:
       - name: sentinel-tmp-conf
         emptyDir: {}
       {{- end }}
+      - name: tmp 
+        emptyDir: {} 
   {{- if and .Values.master.persistence.enabled (not .Values.persistence.existingClaim) }}
   volumeClaimTemplates:
     - metadata:
