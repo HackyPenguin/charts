@@ -349,6 +349,8 @@ spec:
         - name: redis-data
           mountPath: {{ .Values.slave.persistence.path }}
           subPath: {{ .Values.slave.persistence.subPath }}
+        - name: tmp
+          mountPath: /tmp
       {{- end }}
       {{- if .Values.sysctlImage.enabled }}
       - name: init-sysctl
@@ -360,6 +362,8 @@ spec:
         volumeMounts:
         - name: host-sys
           mountPath: /host-sys
+        - name: tmp
+          mountPath: /tmp
         {{- end }}
         command:
 {{ toYaml .Values.sysctlImage.command | indent 10 }}
@@ -389,6 +393,8 @@ spec:
         hostPath:
           path: /sys
       {{- end }}
+      - name: tmp
+        emptyDir: {}
       - name: sentinel-tmp-conf
         emptyDir: {}
       - name: redis-tmp-conf
